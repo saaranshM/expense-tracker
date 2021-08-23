@@ -1,17 +1,18 @@
-const express = require("express")
-const cors = require("cors")
+const express = require("express");
+const cors = require("cors");
 
 const port = process.env.PORT || 3000;
 
 // intializing the express app
 const app = express();
 
-// middleware
-app.use(cors())
-app.use(express.json())
+//MIDDLEWARE//
+app.use(cors());
+app.use(express.json());
+
+//ROUTES//
+app.use("/user", require("./routes/user"));
 
 app.listen(port, () => {
-    console.log(`Server up on port ${port}!`);
-})
-
-
+  console.log(`Server up on port ${port}!`);
+});
