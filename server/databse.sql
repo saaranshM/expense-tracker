@@ -27,7 +27,8 @@ CREATE TABLE user_login (
     user_password VARCHAR(255) NOT NULL,
     created_on TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     last_login TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    is_active BOOLEAN NOT NULL DEFAULT TRUE   
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    tokens VARCHAR(255)[] NOT NULL DEFAULT array[]::VARCHAR(255)[]
 );
 
 -- Creating the user profiles table 
