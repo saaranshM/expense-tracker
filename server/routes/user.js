@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const db = require("../db");
+const jwtGenerator = require("../utils/jwtGenerator");
 
 router.post("/register", async (req, res) => {
   // destructuring  request body
@@ -28,20 +29,18 @@ router.post("/register", async (req, res) => {
         user_email: email,
         user_password: encryptedPassword,
       })
-      .returning("*");
+      .returning(["user_id"]);
 
     // saving personal user details to db
-    const newUserDetails = await db("user_profile")
-      .insert({
-        user_id: newUserCredntials[0].user_id,
-        first_name: firstName,
-        last_name: lastName,
-      })
-      .returning("*");
-    res.status(201).json({
-      userCredentials: newUserCredntials,
-      userDetails: newUserDetails,
+    const newUserDetails = await db("user_profile").insert({
+      user_id: newUserCredntials[0].user_id,
+      first_name: firstName,
+      last_name: lastName,
     });
+    // generate jwt token for user
+    const token = jwtGenerator({ user_id: newUserCredntials[0].user_id });
+    // send user the token after registration
+    res.status(201).json({ token });
   } catch (error) {
     console.log(error.message);
     res.sendStatus(500);
