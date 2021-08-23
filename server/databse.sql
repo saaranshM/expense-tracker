@@ -25,15 +25,21 @@ CREATE TABLE user_login (
     user_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_email domain_email NOT NULL,
     user_password VARCHAR(255) NOT NULL,
-    created_on TIMESTAMPZ NOT NULL DEFAULT NOW(),
-    last_login TIMESTAMPZ NOT NULL DEFAULT NOW(),
-    is_active BOOLEAN NOT NULL DEFAULT TRUE,   
-)
+    created_on TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    last_login TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    is_active BOOLEAN NOT NULL DEFAULT TRUE   
+);
 
 -- Creating the user profiles table 
 CREATE TABLE user_profile (
     user_id UUID PRIMARY KEY REFERENCES user_login (user_id),
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255),
-    updated_on TIMESTAMPZ NOT NULL DEFAULT NOW(),
-)
+    updated_on TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- Creating trigger to update user updated_on timestamp automatically
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON user_profile
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
