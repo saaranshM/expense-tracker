@@ -1,4 +1,5 @@
 const db = require("../db/db");
+const bcrypt = require("bcrypt");
 
 class UserDAO {
   //Query to register new user//

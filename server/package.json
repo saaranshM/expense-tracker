@@ -18,5 +18,10 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.10",
     "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
   }
 }

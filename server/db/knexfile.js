@@ -15,5 +15,26 @@ module.exports = {
     migrations: {
       tableName: "knex_migrations",
     },
+    seeds: {
+      directory: __dirname + "/seeds/development",
+    },
+  },
+  test: {
+    client: "postgresql",
+    connection: {
+      database: "expense_tracker_test",
+      user: "postgres",
+      password: "root",
+    },
+    pool: {
+      min: 2,
+      max: 10,
+    },
+    migrations: {
+      tableName: "knex_migrations",
+    },
+    seeds: {
+      directory: __dirname + "/seeds/test",
+    },
   },
 };
