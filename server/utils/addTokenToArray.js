@@ -1,4 +1,4 @@
-const db = require("../db");
+const db = require("../db/db");
 
 const addTokenToArray = async (userId, token) => {
   await db("user_login")
