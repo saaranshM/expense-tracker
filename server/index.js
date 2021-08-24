@@ -4,7 +4,6 @@ require("dotenv").config();
 
 const port = process.env.PORT || 3000;
 
-process.env.NODE_ENV = "test";
 // intializing the express app
 const app = express();
 

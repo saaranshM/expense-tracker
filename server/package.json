@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ml": "knex migrate:latest --knexfile db/knexfile.js",
-    "mr": "knex migrate:rollback --knexfile db/knexfile.js",
+    "ml": "knex migrate:latest --env development --knexfile db/knexfile.js",
+    "mr": "knex migrate:rollback  --env development --knexfile db/knexfile.js",
+    "ml-t": "knex migrate:latest --env test --knexfile db/knexfile.js",
+    "mr-t": "knex migrate:rollback --env test --knexfile db/knexfile.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

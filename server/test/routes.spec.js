@@ -24,7 +24,10 @@ describe("POST /user/register", () => {
         res.should.have.status(201);
         res.should.be.json;
         res.body.should.have.property("token");
+        process.env.NODE_ENV = "dev";
         done();
       });
   });
 });
+
+process.env.NODE_ENV = "dev";
