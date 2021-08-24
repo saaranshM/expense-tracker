@@ -19,7 +19,9 @@ class UserController {
         });
       }
 
-      res.sendStatus(500);
+      res.status(500).json({
+        error: error.message,
+      });
     }
   }
 
@@ -34,7 +36,7 @@ class UserController {
       console.log(error.message);
       // send not found response if user is not found while loging in
       if (error.message === "not-found") {
-        return res.status(401).json({
+        return res.status(404).json({
           error: "not-found",
           message: "User does not exist",
         });
@@ -47,7 +49,9 @@ class UserController {
           message: "email or password is incorrect",
         });
       }
-      res.sendStatus(500);
+      res.status(500).json({
+        error: error.message,
+      });
     }
   }
 }

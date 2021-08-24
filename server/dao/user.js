@@ -1,11 +1,8 @@
 const db = require("../db/db");
-const bcrypt = require("bcrypt");
-const jwtGenerator = require("../utils/jwtGenerator");
-const addTokenToArray = require("../utils/addTokenToArray");
 
 class UserDAO {
-  //Controller to register new user//
-  async createUser(firstName, lastName, email, password) {
+  //Query to register new user//
+  async createUser(email, password) {
     // cheking if email already exists
     const user = await db("user_login")
       .select(["user_email"])
@@ -26,51 +23,35 @@ class UserDAO {
       })
       .returning("user_id");
 
-    // generate jwt token for user
-    const token = jwtGenerator({ user_id: user_id });
-
-    // call function to add token to tokens array
-    await addTokenToArray(user_id, token);
-
-    // saving personal user details to db
-    await db("user_profile").insert({
-      user_id: user_id,
-      first_name: firstName,
-      last_name: lastName,
-    });
-    // return user the token after registration
-    return token;
+    return user_id;
   }
 
-  // Controller to login user //
+  // Query to add user profile //
+  async addUserProfile(userId, firstName, lastName) {
+    return await db("user_profile")
+      .insert({
+        user_id: userId,
+        first_name: firstName,
+        last_name: lastName,
+      })
+      .returning("user_id");
+  }
 
+  // Query to login user //
   async loginUser(email, password) {
     // get user from database
     const user = await db("user_login").select().where({ user_email: email });
 
-    if (!user[0]) {
-      throw new Error("not-found");
-    }
+    return user;
+  }
 
-    // check if password is valid
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      user[0].user_password
-    );
-
-    // throw invalid-credentails error if password is not valid
-    if (!isPasswordValid) {
-      throw new Error("invalid-credentials");
-    }
-
-    // generate jwt token for user
-    const token = jwtGenerator({ user_id: user[0].user_id });
-
-    // call function to add token to tokens array
-    await addTokenToArray(user[0].user_id, token);
-
-    // return user the token after registration
-    return token;
+  // Query to add token to user token array //
+  async addTokenToArray(userId, token) {
+    await db("user_login")
+      .where({ user_id: userId })
+      .update({
+        tokens: db.raw("array_append(tokens, ?)", [token]),
+      });
   }
 }
 
