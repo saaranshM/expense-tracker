@@ -8,6 +8,7 @@
     "mr": "knex migrate:rollback  --env development --knexfile db/knexfile.js",
     "ml-t": "knex migrate:latest --env test --knexfile db/knexfile.js",
     "mr-t": "knex migrate:rollback --env test --knexfile db/knexfile.js",
+    "dev": "npm run mr && npm run ml && nodemon index.js",
     "test": "npx mocha --require mocha-suppress-logs --exit"
   },
   "author": "",

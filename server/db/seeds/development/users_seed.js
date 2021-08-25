@@ -8,7 +8,7 @@ exports.seed = async function (knex) {
 
   const saltRounds = 10;
   const salt = await bcrypt.genSalt(saltRounds);
-  const encryptedPassword = await bcrypt.hash("test123", salt);
+  const encryptedPassword = await bcrypt.hash("test123456", salt);
 
   // Inserts seed entries
   const [userId] = await knex("user_login")
