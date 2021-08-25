@@ -13,7 +13,7 @@ exports.seed = async function (knex) {
   // Inserts seed entries
   const [userId] = await knex("user_login")
     .insert({
-      user_email: "saaransh.menon2000@gmail.com",
+      user_email: "saaransh@test.com",
       user_password: encryptedPassword,
     })
     .returning("user_id");
