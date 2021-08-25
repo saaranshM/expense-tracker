@@ -8,7 +8,7 @@
     "mr": "knex migrate:rollback  --env development --knexfile db/knexfile.js",
     "ml-t": "knex migrate:latest --env test --knexfile db/knexfile.js",
     "mr-t": "knex migrate:rollback --env test --knexfile db/knexfile.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx mocha --require mocha-suppress-logs --exit"
   },
   "author": "",
   "license": "ISC",
@@ -22,8 +22,9 @@
     "pg": "^8.7.1"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.3.4",
     "chai-http": "^2.0.1",
-    "mocha": "^2.4.5"
+    "mocha": "^9.1.0",
+    "mocha-suppress-logs": "^0.3.1"
   }
 }

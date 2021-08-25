@@ -17,21 +17,19 @@ const seedConfig = {
 };
 
 // cleaning and intializing db before runnig tests
-beforeEach(async (done) => {
+beforeEach(async () => {
   await db.migrate.rollback(migrationConfig);
   await db.migrate.latest(migrationConfig);
   await db.seed.run(seedConfig);
-  done();
 });
 
 // cleaning db before runnig tests
-afterEach(async (done) => {
+afterEach(async () => {
   await db.migrate.rollback(migrationConfig);
-  done();
 });
 
 describe("POST /user/register", () => {
-  it("should return token after registering user", (done) => {
+  it("should return jwt after registering user", (done) => {
     chai
       .request(server)
       .post("/user/register")
@@ -45,7 +43,6 @@ describe("POST /user/register", () => {
         res.should.have.status(201);
         res.should.be.json;
         res.body.should.have.property("token");
-        process.env.NODE_ENV = "dev";
         done();
       });
   });
@@ -70,5 +67,3 @@ describe("POST /user/register", () => {
       });
   });
 });
-
-process.env.NODE_ENV = "dev";
