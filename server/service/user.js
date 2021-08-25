@@ -61,7 +61,7 @@ class UserService {
       user[0].user_password
     );
 
-    // throw invalid-credentails error if password is not valid
+    // throw invalid-credentials error if password is not valid
     if (!isPasswordValid) {
       throw new Error("invalid-credentials");
     }

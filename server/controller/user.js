@@ -45,7 +45,7 @@ class UserController {
       // send invalid credentials if user enters wrong password
       if (error.message === "invalid-credentials") {
         return res.status(401).json({
-          error: "invalid-credentails",
+          error: "invalid-credentials",
           message: "email or password is incorrect",
         });
       }

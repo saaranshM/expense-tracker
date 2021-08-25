@@ -44,4 +44,38 @@ describe("POST /user/login", () => {
         done();
       });
   });
+  it("should not-found when user does not exsist when loging in", (done) => {
+    chai
+      .request(server)
+      .post("/user/login")
+      .send({
+        email: "mary@test.com",
+        password: "test123",
+      })
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.should.be.json;
+        res.body.should.have.property("error");
+        res.body.error.should.equal("not-found");
+        res.body.should.not.have.property("token");
+        done();
+      });
+  });
+  it("should return invalid-credentials when password is incorrect", (done) => {
+    chai
+      .request(server)
+      .post("/user/login")
+      .send({
+        email: "saaransh@test.com",
+        password: "wrong-password",
+      })
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.should.be.json;
+        res.body.should.have.property("error");
+        res.body.error.should.equal("invalid-credentials");
+        res.body.should.not.have.property("token");
+        done();
+      });
+  });
 });
