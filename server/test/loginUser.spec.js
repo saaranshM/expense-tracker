@@ -44,7 +44,7 @@ describe("POST /user/login", () => {
         done();
       });
   });
-  it("should not-found when user does not exsist when loging in", (done) => {
+  it("should return not-found when user does not exsist when loging in", (done) => {
     chai
       .request(server)
       .post("/user/login")
