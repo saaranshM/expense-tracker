@@ -35,7 +35,7 @@ describe("POST /user/login", () => {
       .post("/user/login")
       .send({
         email: "saaransh@test.com",
-        password: "test123",
+        password: "test123456",
       })
       .end((err, res) => {
         res.should.have.status(200);
@@ -50,7 +50,7 @@ describe("POST /user/login", () => {
       .post("/user/login")
       .send({
         email: "mary@test.com",
-        password: "test123",
+        password: "test123456",
       })
       .end((err, res) => {
         res.should.have.status(404);
@@ -74,6 +74,26 @@ describe("POST /user/login", () => {
         res.should.be.json;
         res.body.should.have.property("error");
         res.body.error.should.equal("invalid-credentials");
+        res.body.should.not.have.property("token");
+        done();
+      });
+  });
+  it("should return 422 response code if request body does not pass validation check", (done) => {
+    chai
+      .request(server)
+      .post("/user/login")
+      .send({
+        email: "saaransh@@test.com",
+        password: "test123",
+      })
+      .end((err, res) => {
+        res.should.have.status(422);
+        res.should.be.json;
+        res.body.should.have.property("errors");
+        res.body.errors[0].msg.should.equal("email is not valid");
+        res.body.errors[1].msg.should.equal(
+          "password should be a minimum of 8 characters"
+        );
         res.body.should.not.have.property("token");
         done();
       });
