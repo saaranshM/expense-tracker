@@ -40,7 +40,8 @@ describe("POST /user/login", () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
-        res.body.should.have.property("token");
+        res.body.should.have.property("accessToken");
+        res.body.should.have.property("refreshToken");
         done();
       });
   });
@@ -57,7 +58,8 @@ describe("POST /user/login", () => {
         res.should.be.json;
         res.body.should.have.property("error");
         res.body.error.should.equal("not-found");
-        res.body.should.not.have.property("token");
+        res.body.should.not.have.property("accessToken");
+        res.body.should.not.have.property("refreshToken");
         done();
       });
   });
@@ -74,7 +76,8 @@ describe("POST /user/login", () => {
         res.should.be.json;
         res.body.should.have.property("error");
         res.body.error.should.equal("invalid-credentials");
-        res.body.should.not.have.property("token");
+        res.body.should.not.have.property("accessToken");
+        res.body.should.not.have.property("refreshToken");
         done();
       });
   });
@@ -94,7 +97,8 @@ describe("POST /user/login", () => {
         res.body.errors[1].msg.should.equal(
           "password should be a minimum of 8 characters"
         );
-        res.body.should.not.have.property("token");
+        res.body.should.not.have.property("accessToken");
+        res.body.should.not.have.property("refreshToken");
         done();
       });
   });

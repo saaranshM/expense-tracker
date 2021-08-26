@@ -42,7 +42,8 @@ describe("POST /user/register", () => {
       .end((err, res) => {
         res.should.have.status(201);
         res.should.be.json;
-        res.body.should.have.property("token");
+        res.body.should.have.property("accessToken");
+        res.body.should.have.property("refreshToken");
         done();
       });
   });

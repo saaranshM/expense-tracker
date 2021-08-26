@@ -13,10 +13,6 @@ exports.up = async (knex) => {
       table.string("user_email").notNullable().unique();
       table.string("user_password").notNullable();
       table.boolean("is_active").notNullable().defaultTo(true);
-      table
-        .specificType("tokens", "VARCHAR(255)[]")
-        .notNullable()
-        .defaultTo(knex.raw("array[]::VARCHAR(255)[]"));
       table.timestamps(true, true);
     })
     .createTable("user_profile", (table) => {

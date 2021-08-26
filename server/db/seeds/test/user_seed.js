@@ -17,12 +17,6 @@ exports.seed = async function (knex) {
       user_password: encryptedPassword,
     })
     .returning("user_id");
-  const token = jwtGenerator({ user_id: userId });
-  await knex("user_login")
-    .where({ user_id: userId })
-    .update({
-      tokens: knex.raw("array_append(tokens, ?)", [token]),
-    });
 
   return knex("user_profile").insert({
     user_id: userId,

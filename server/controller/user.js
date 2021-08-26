@@ -4,10 +4,10 @@ class UserController {
   async createUser(req, res) {
     try {
       // getting user token from the service
-      const token = await UserService.createUser(req.body);
+      const tokens = await UserService.createUser(req.body);
 
       // sending user token to user after succesful registration
-      res.status(201).json({ token });
+      res.status(201).json(tokens);
     } catch (error) {
       console.log(error.message);
 
@@ -28,10 +28,10 @@ class UserController {
   async loginUser(req, res) {
     try {
       // getting user token from the service
-      const token = await UserService.loginUser(req.body);
+      const tokens = await UserService.loginUser(req.body);
 
       // sending user token to user after succesful registration
-      res.status(200).json({ token });
+      res.status(200).json(tokens);
     } catch (error) {
       console.log(error.message);
       // send not found response if user is not found while loging in
