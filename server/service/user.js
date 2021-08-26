@@ -1,6 +1,7 @@
 const UserDAO = require("../dao/user");
 const jwtGenerator = require("../utils/jwtGenerator");
 const bcrypt = require("bcrypt");
+const verifyRefreshToken = require("../utils/verifyRefreeshToken");
 
 class UserService {
   async createUser(userDto) {
@@ -60,6 +61,15 @@ class UserService {
     const refreshToken = await jwtGenerator(user[0].user_id, "refresh");
 
     // return the tokens to the controller
+    return { accessToken, refreshToken };
+  }
+
+  async refreshToken(token) {
+    const userRefreshToken = token.split(" ")[1];
+    const userId = await verifyRefreshToken(userRefreshToken);
+    const accessToken = await jwtGenerator(userId);
+    const refreshToken = await jwtGenerator(userId);
+
     return { accessToken, refreshToken };
   }
 }

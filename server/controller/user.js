@@ -54,6 +54,27 @@ class UserController {
       });
     }
   }
+
+  async refreshToken(req, res) {
+    try {
+      const tokens = await UserService.refreshToken(
+        req.header("Authorization")
+      );
+
+      res.status(200).json(tokens);
+    } catch (error) {
+      if (error.message === "invalid-token") {
+        return res.status(403).json({
+          error: "invalid-token",
+          message: "token is invalid",
+        });
+      }
+
+      res.status(500).json({
+        error: error.message,
+      });
+    }
+  }
 }
 
 module.exports = new UserController();
