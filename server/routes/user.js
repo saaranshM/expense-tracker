@@ -4,8 +4,14 @@ const {
   validateNewUser,
   validateLoginUser,
 } = require("../middleware/validators/userValidator");
-
+const auth = require("../middleware/auth/auth");
 const { tokenValidator } = require("../middleware/validators/tokenValidator");
+
+// dummy procted Route //
+router.get("/protected", auth, (req, res) => {
+  console.log(req.user);
+  res.send("Protected data!");
+});
 
 // Route to register new user //
 router.post("/register", validateNewUser, UserController.createUser);
