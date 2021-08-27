@@ -51,4 +51,16 @@ describe("POST /user/refresh-token", () => {
         done();
       });
   });
+  it("should fail if invalid refresh token in provided", (done) => {
+    chai
+      .request(server)
+      .post("/user/refresh-token")
+      .set("Authorization", "Bearer invalid-refresh-token")
+      .end(async (err, res) => {
+        res.should.have.status(403);
+        res.body.should.not.have.property("refreshToken");
+        res.body.should.not.have.property("accessToken");
+        done();
+      });
+  });
 });
