@@ -65,12 +65,17 @@ class UserService {
   }
 
   async refreshToken(token) {
+    // get refresh token from header
     const userRefreshToken = token.split(" ")[1];
+
+    // verify refresh token and get user
     const userId = await verifyRefreshToken(userRefreshToken);
-    console.log(userId);
+
+    // generate access token and refresh token
     const accessToken = jwtGenerator(userId);
     const refreshToken = jwtGenerator(userId);
 
+    // return the tokens to the controller
     return { accessToken, refreshToken };
   }
 }

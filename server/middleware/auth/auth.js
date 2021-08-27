@@ -5,7 +5,10 @@ const auth = (req, res, next) => {
   try {
     const tokenHeader = req.header("Authorization");
     if (!tokenHeader) {
-      throw new Error();
+      return res.status(400).json({
+        error: "missing-auth-header",
+        message: "auth header is missing",
+      });
     }
     const token = tokenHeader.split(" ")[1];
     const payload = jwt.verify(token, process.env.ACCESS_JWT_SECRET);
@@ -14,8 +17,8 @@ const auth = (req, res, next) => {
     req.user = payload.user;
     next();
   } catch (error) {
-    console.log(error);
-    res.status(403).json({
+    console.log(error.message);
+    return res.status(403).json({
       error: "invalid-token",
       message: "token is invalid",
     });

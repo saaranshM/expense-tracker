@@ -19,6 +19,7 @@ process.on("SIGINT", cleanup);
 process.on("SIGTERM", cleanup);
 
 function cleanup() {
+  client.flushall();
   client.quit(function () {
     console.log("Redis client stopped.");
   });
