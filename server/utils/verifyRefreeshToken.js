@@ -3,23 +3,23 @@ require("dotenv").config({ path: __dirname + "/../.env" });
 const client = require("../redis/redisInit");
 
 const verifyRefreshToken = async (refreshToken) => {
-  try {
-    const payload = await jwt.verify(
+  return new Promise((resolve, reject) => {
+    jwt.verify(
       refreshToken,
-      process.env.REFRESH_JWT_SECRET
-    );
-    client.GET(user, (error, result) => {
-      if (error) {
-        console.log(error.message);
-        throw new Error("redis-get-error");
-      }
+      process.env.REFRESH_JWT_SECRET,
+      (error, payload) => {
+        if (error) return reject(new Error("invalid-token"));
 
-      if (refreshToken === result) return payload.user;
-      throw new Error("invalid-token");
-    });
-  } catch (error) {
-    throw new Error("invalid-token");
-  }
+        const user = payload.user;
+
+        client.GET(user, (error, result) => {
+          if (error) throw new Error("redis-get-error");
+
+          if (result === refreshToken) resolve(user);
+        });
+      }
+    );
+  });
 };
 
 module.exports = verifyRefreshToken;

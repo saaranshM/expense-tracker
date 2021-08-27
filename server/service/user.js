@@ -67,8 +67,9 @@ class UserService {
   async refreshToken(token) {
     const userRefreshToken = token.split(" ")[1];
     const userId = await verifyRefreshToken(userRefreshToken);
-    const accessToken = await jwtGenerator(userId);
-    const refreshToken = await jwtGenerator(userId);
+    console.log(userId);
+    const accessToken = jwtGenerator(userId);
+    const refreshToken = jwtGenerator(userId);
 
     return { accessToken, refreshToken };
   }
