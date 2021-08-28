@@ -72,9 +72,12 @@ class UserService {
     // verify refresh token and get user
     const userId = await verifyRefreshToken(userRefreshToken);
 
+    // if user is not found throw no user to logout error
     if (userId === "not-found") {
-      return;
+      throw new Error("invalid-logout");
     }
+
+    // if user is found del user's refresh token from redis
     client.DEL(userId, (error, result) => {
       if (error) throw new Error("redis-del-error");
     });

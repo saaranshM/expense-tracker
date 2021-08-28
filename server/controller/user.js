@@ -58,11 +58,16 @@ class UserController {
 
   async logoutUser(req, res) {
     try {
+      // call the logout user service
       await UserService.logoutUser(req.header("Authorization"));
 
+      // send status 204 if user succesfully logs out
       res.sendStatus(204);
     } catch (error) {
-      console.log(error.message);
+      // send response 400 if no user to logout
+      if (error.message === "invalid-logout") {
+        return res.status(400).json({ error: error.message });
+      }
       res.status(500).json({ error: error.message });
     }
   }

@@ -20,7 +20,7 @@ router.post("/register", validateNewUser, UserController.createUser);
 //Route to login user//
 router.post("/login", validateLoginUser, UserController.loginUser);
 
-//Route to login user//
+//Route to logout user//
 router.post("/logout", tokenValidator, UserController.logoutUser);
 
 // Route to refresh access token //
