@@ -28,7 +28,6 @@ class UserController {
   async loginUser(req, res) {
     try {
       // getting user token from the service
-      console.log("Hello");
       const tokens = await UserService.loginUser(req.body);
 
       // sending user token to user after succesful registration
@@ -65,6 +64,12 @@ class UserController {
       res.sendStatus(204);
     } catch (error) {
       // send response 400 if no user to logout
+      if (error.message === "invalid-token") {
+        return res.status(403).json({
+          error: "invalid-token",
+          message: "token is invalid",
+        });
+      }
       if (error.message === "invalid-logout") {
         return res.status(400).json({ error: error.message });
       }

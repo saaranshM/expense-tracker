@@ -8,6 +8,7 @@ const server = require("../index");
 const db = require("../db/db");
 const client = require("../redis/redisInit");
 const jwtGenerator = require("../utils/jwtGenerator");
+const jwt = require("jsonwebtoken");
 
 chai.use(chaiHttp);
 
@@ -31,9 +32,7 @@ beforeEach(async () => {
     .where({ user_email: "saaransh@test.com" });
 
   const token = jwtGenerator(user[0].user_id, "refresh");
-  client.SETEX(user[0].user_id, 7 * 24 * 60 * 60, token, (error, res) => {
-    console.log(res);
-  });
+  client.SETEX(user[0].user_id, 7 * 24 * 60 * 60, token, (error, res) => {});
 });
 
 // cleaning db before running tests
@@ -55,5 +54,19 @@ describe("POST /user/logout", () => {
           done();
         });
     });
+  });
+  it("should return 400 if refresh token has expired or invalid token is provided", (done) => {
+    const token = jwt.sign(
+      { user: "fake-user" },
+      process.env.REFRESH_JWT_SECRET
+    );
+    chai
+      .request(server)
+      .post("/user/logout")
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        res.should.have.status(400);
+        done();
+      });
   });
 });
