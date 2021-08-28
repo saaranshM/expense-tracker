@@ -13,9 +13,10 @@ const verifyRefreshToken = async (refreshToken) => {
         const user = payload.user;
 
         client.GET(user, (error, result) => {
-          if (error) throw new Error("redis-get-error");
+          if (error) reject(new Error("redis-get-error"));
 
           if (result === refreshToken) resolve(user);
+          resolve("not-found");
         });
       }
     );

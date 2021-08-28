@@ -1,0 +1,14 @@
+POST "http://localhost:3000/user/register"
+Content-Type: application/json
+
+{
+    email: "test@test.com",
+    password: "test123456",
+    firstName: "Test",
+    lastName: "Hello"
+}
+
+###
+
+POST  "http://localhost:3000/user/logout"
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZjI0NTkyYzgtMzBhMC00NDYxLWFjMzgtNTFmYzI3ZmMwZjI4IiwiaWF0IjoxNjMwMTI1NjQ4LCJleHAiOjE2MzA3MzA0NDh9.ROZ-HbOQnkYPr9IeOgRc5BLdnyQ1XAPpIRwxz0paS_o

@@ -18,6 +18,7 @@ describe("Auth Middleware", () => {
     expect(error).to.equal("missing-auth-header");
     done();
   });
+
   it("should respond with 403 if access token is invalid", (done) => {
     const req = httpMocks.createRequest({
       headers: {

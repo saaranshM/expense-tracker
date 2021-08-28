@@ -28,6 +28,7 @@ class UserController {
   async loginUser(req, res) {
     try {
       // getting user token from the service
+      console.log("Hello");
       const tokens = await UserService.loginUser(req.body);
 
       // sending user token to user after succesful registration
@@ -52,6 +53,17 @@ class UserController {
       res.status(500).json({
         error: error.message,
       });
+    }
+  }
+
+  async logoutUser(req, res) {
+    try {
+      await UserService.logoutUser(req.header("Authorization"));
+
+      res.sendStatus(204);
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({ error: error.message });
     }
   }
 

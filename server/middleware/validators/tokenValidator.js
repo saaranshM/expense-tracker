@@ -1,9 +1,9 @@
-const { check, validationResult } = require("express-validator");
+const { validationResult, header } = require("express-validator");
 
 exports.tokenValidator = [
-  check("Authorization")
+  header("Authorization")
     .exists({ checkFalsy: true })
-    .withMessage("token is does not exists")
+    .withMessage("token does not exists")
     .bail(),
 
   (req, res, next) => {

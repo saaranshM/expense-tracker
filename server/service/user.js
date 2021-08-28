@@ -2,6 +2,7 @@ const UserDAO = require("../dao/user");
 const jwtGenerator = require("../utils/jwtGenerator");
 const bcrypt = require("bcrypt");
 const verifyRefreshToken = require("../utils/verifyRefreeshToken");
+const client = require("../redis/redisInit");
 
 class UserService {
   async createUser(userDto) {
@@ -62,6 +63,21 @@ class UserService {
 
     // return the tokens to the controller
     return { accessToken, refreshToken };
+  }
+
+  async logoutUser(token) {
+    // get refresh token from header
+    const userRefreshToken = token.split(" ")[1];
+
+    // verify refresh token and get user
+    const userId = await verifyRefreshToken(userRefreshToken);
+
+    if (userId === "not-found") {
+      return;
+    }
+    client.DEL(userId, (error, result) => {
+      if (error) throw new Error("redis-del-error");
+    });
   }
 
   async refreshToken(token) {
