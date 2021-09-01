@@ -8,7 +8,7 @@ exports.up = function (knex) {
       .notNullable()
       .primary();
 
-    table.bigInteger("monthly_income").notNullable();
+    table.decimal("monthly_income").notNullable();
     table.timestamp("pay_date").notNullable();
     table.timestamps(true, true);
   });

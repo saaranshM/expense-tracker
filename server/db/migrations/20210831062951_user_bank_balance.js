@@ -7,7 +7,7 @@ exports.up = function (knex) {
       .unique()
       .notNullable()
       .primary();
-    table.bigInteger("bank_balance").notNullable();
+    table.decimal("bank_balance").notNullable();
     table.timestamps(true, true);
   });
 };
