@@ -3,6 +3,7 @@ const UserController = require("../controller/user");
 const {
   validateNewUser,
   validateLoginUser,
+  validateUserDetails,
 } = require("../middleware/validators/userValidator");
 const auth = require("../middleware/auth/auth");
 const { tokenValidator } = require("../middleware/validators/tokenValidator");
@@ -25,5 +26,8 @@ router.post("/logout", tokenValidator, UserController.logoutUser);
 
 // Route to refresh access token //
 router.post("/refresh-token", tokenValidator, UserController.refreshToken);
+
+// Route to add user details
+router.post("/details", validateUserDetails, UserController.addUserDetails);
 
 module.exports = router;

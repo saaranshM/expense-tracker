@@ -3,7 +3,7 @@ const jwtGenerator = require("../utils/jwtGenerator");
 const bcrypt = require("bcrypt");
 const verifyRefreshToken = require("../utils/verifyRefreeshToken");
 const client = require("../redis/redisInit");
-const lodash = require("lodash");
+const { mapKeys, snakeCase } = require("lodash");
 
 class UserService {
   async createUser(userDto) {
@@ -105,12 +105,12 @@ class UserService {
 
     // verify refresh token and get user
     const userId = await verifyRefreshToken(userRefreshToken);
-    const incomeDetails = lodash.mapKeys(
+    const incomeDetails = mapKeys(
       { userId, monthlyIncome, payDate },
-      (value, key) => lodash.snakeCase(key)
+      (value, key) => snakeCase(key)
     );
-    const bankDetails = lodash.mapKeys({ userId, bankBalance }, (value, key) =>
-      lodash.snakeCase(key)
+    const bankDetails = mapKeys({ userId, bankBalance }, (value, key) =>
+      snakeCase(key)
     );
 
     await UserDAO.addUserDetails(incomeDetails, bankDetails);
