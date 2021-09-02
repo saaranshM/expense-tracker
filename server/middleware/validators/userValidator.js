@@ -73,3 +73,28 @@ exports.validateLoginUser = [
     next();
   },
 ];
+
+exports.validateUserDetails = [
+  check("monthlyIncome")
+    .exists({ checkFalsy: true })
+    .isNumeric()
+    .withMessage("income is not valid")
+    .bail(),
+  check("bankBalance")
+    .exists({ checkFalsy: true })
+    .isNumeric()
+    .withMessage("Bank balance is not valide")
+    .bail(),
+  check("payDate")
+    .exists({ checkFalsy: true })
+    .isDate()
+    .withMessage("pay date is not valid")
+    .bail(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty())
+      return res.status(422).json({ errors: errors.array() });
+    next();
+  },
+];

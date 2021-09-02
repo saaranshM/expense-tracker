@@ -1,3 +1,5 @@
+const promisify = require("util").promisify;
+const lodash = require("lodash");
 const db = require("../db/db");
 const bcrypt = require("bcrypt");
 
@@ -53,6 +55,19 @@ class UserDAO {
       .update({
         tokens: db.raw("array_append(tokens, ?)", [token]),
       });
+  }
+
+  async addUserDetails(incomeDetails, bankDetails) {
+    const trx = promisify(db.transaction);
+
+    await trx("user_monthly_income").insert({
+      incomeDetails,
+    });
+    await trx("user_bank_balance").insert({
+      bankDetails,
+    });
+
+    await trx.commit();
   }
 }
 

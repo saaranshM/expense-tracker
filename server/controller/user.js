@@ -97,6 +97,21 @@ class UserController {
       });
     }
   }
+
+  async addUserDetails(req, res) {
+    try {
+      const token = req.header("Authorization");
+      const body = req.body;
+
+      await UserService.addUserDetails(body, token);
+      res.sendStatus(200);
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({
+        error: error.message,
+      });
+    }
+  }
 }
 
 module.exports = new UserController();
