@@ -87,7 +87,7 @@ exports.validateUserDetails = [
     .bail(),
   check("payDate")
     .exists({ checkFalsy: true })
-    .isDate()
+    .isISO8601()
     .withMessage("pay date is not valid")
     .bail(),
 

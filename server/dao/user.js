@@ -58,16 +58,11 @@ class UserDAO {
   }
 
   async addUserDetails(incomeDetails, bankDetails) {
-    const trx = promisify(db.transaction);
-
-    await trx("user_monthly_income").insert({
-      incomeDetails,
+    await db.transaction(async (trx) => {
+      await trx("user_monthly_income").insert(incomeDetails);
+      await trx("user_bank_balance").insert(bankDetails);
+      await trx.commit();
     });
-    await trx("user_bank_balance").insert({
-      bankDetails,
-    });
-
-    await trx.commit();
   }
 }
 

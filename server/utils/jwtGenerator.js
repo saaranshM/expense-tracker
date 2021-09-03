@@ -8,7 +8,9 @@ const jwtGenerator = (userId, type = "auth") => {
   };
   const token =
     type === "auth"
-      ? jwt.sign(payload, process.env.ACCESS_JWT_SECRET, { expiresIn: "30s" })
+      ? jwt.sign(payload, process.env.ACCESS_JWT_SECRET, {
+          expiresIn: "1 hour",
+        })
       : jwt.sign(payload, process.env.REFRESH_JWT_SECRET, {
           expiresIn: "7 days",
         });

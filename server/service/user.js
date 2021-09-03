@@ -2,6 +2,7 @@ const UserDAO = require("../dao/user");
 const jwtGenerator = require("../utils/jwtGenerator");
 const bcrypt = require("bcrypt");
 const verifyRefreshToken = require("../utils/verifyRefreeshToken");
+const verifyAccessToken = require("../utils/verifyAccessToken");
 const client = require("../redis/redisInit");
 const { mapKeys, snakeCase } = require("lodash");
 
@@ -101,10 +102,10 @@ class UserService {
 
   async addUserDetails({ monthlyIncome, payDate, bankBalance }, token) {
     // get refresh token from header
-    const userRefreshToken = token.split(" ")[1];
+    const userAccessToken = token.split(" ")[1];
 
     // verify refresh token and get user
-    const userId = await verifyRefreshToken(userRefreshToken);
+    const userId = await verifyAccessToken(userAccessToken);
     const incomeDetails = mapKeys(
       { userId, monthlyIncome, payDate },
       (value, key) => snakeCase(key)
