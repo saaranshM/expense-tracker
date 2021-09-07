@@ -1,0 +1,9 @@
+.login {
+  background-color: rgba($color: #fff, $alpha: 0.2);
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  top: 0;
+  z-index: 1;
+  backdrop-filter: blur(5rem);
+}
