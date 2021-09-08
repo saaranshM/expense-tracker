@@ -4,4 +4,18 @@
   top: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  position: relative;
+}
+
+.cursor {
+  position: fixed;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: rgb(255, 255, 255);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition: all 0.1s;
+  border: 1px solid black;
 }
