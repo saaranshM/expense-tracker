@@ -1,0 +1,10 @@
+@mixin normalButtonActive($blur, $offset) {
+  box-shadow: -1.5rem -1.5rem 1.5rem rgba(#fff, 0.5),
+    1.5rem $offset $blur rgba(#464646, 0.12),
+    inset 9px 9px 20px rgba(#d9dadd, 0.9), inset -9px -9px 20px rgba(#fff, 0.9);
+}
+@mixin primaryButtonActive($blur, $offset) {
+  box-shadow: 9px $offset $blur rgba($tomato, 0.9),
+    -9px -9px 20px rgba(#fff, 0.9), inset 9px 9px 20px rgba(#000, 0.15),
+    inset -9px -9px 20px rgba(#fff, 0.1);
+}

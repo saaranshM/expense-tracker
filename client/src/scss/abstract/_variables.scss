@@ -26,3 +26,10 @@ $normal-bs: 9px 9px 20px rgba(#d9dadd, 0.9), -9px -9px 20px rgba(#fff, 0.9);
 $inset-bs: -1.5rem -1.5rem 1.5rem rgba(#fff, 0.5),
   1.5rem 1.5rem 1.5rem rgba(#464646, 0.12),
   inset 9px 9px 20px rgba(#d9dadd, 0.9), inset -9px -9px 20px rgba(#fff, 0.9);
+
+$primary-normal-bs: 9px 9px 20px rgba($tomato, 0.9),
+  -9px -9px 20px rgba(#fff, 0.9);
+
+$primary-inset-bs: 9px 9px 15px rgba($tomato, 0.9),
+  -9px -9px 20px rgba(#fff, 0.9), inset 9px 9px 20px rgba(#000, 0.15),
+  inset -9px -9px 20px rgba(#fff, 0.1);

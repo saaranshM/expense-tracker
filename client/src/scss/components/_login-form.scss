@@ -1,13 +1,11 @@
 .login-form {
   grid-column: 2 / -1;
   padding: 5rem;
-  width: 100%;
 
   &_container {
     display: flex;
     flex-direction: column;
     margin-top: 18vh;
-    width: 100%;
   }
   &_heading {
     font-weight: 600;
@@ -22,6 +20,33 @@
 }
 
 .login-form-main {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
   margin-top: 3rem;
-  width: 100%;
+
+  &_or-text {
+    display: flex;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 1.2rem;
+    align-self: center;
+    width: 100%;
+    margin-top: 3rem;
+    align-items: center;
+
+    &:before,
+    &:after {
+      content: "";
+      flex: 1 1;
+      height: 1px;
+      background-color: $gray;
+    }
+    &:before {
+      margin-right: 1rem;
+    }
+    &:after {
+      margin-left: 1rem;
+    }
+  }
 }

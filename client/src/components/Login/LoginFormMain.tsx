@@ -7,7 +7,9 @@ const LoginFormMain: FC = () => {
     <form className="login-form-main">
       <Input type="email" label="email" placeholder="Enter Email" />
       <Input type="password" label="password" placeholder="Enter Password" />
-      <Button text="Log In" />
+      <Button text="Log In" primary />
+      <div className="login-form-main_or-text">or</div>
+      <Button text="Create New Account" />
     </form>
   );
 };
