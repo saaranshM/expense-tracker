@@ -22,7 +22,7 @@
   height: 4.5rem;
   border-radius: 8px;
   box-shadow: $inset-bs;
-  transition: all 0.3s ease-out;
+  transition: box-shadow 0.3s;
 
   &:focus,
   &:active {
