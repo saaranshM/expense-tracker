@@ -5,14 +5,16 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: relative;
+  cursor: none;
+  background-color: $off-white;
 }
 
 .cursor {
   position: fixed;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  background: rgb(255, 255, 255);
+  background: #fff;
   transform: translate(-50%, -50%);
   pointer-events: none;
   mix-blend-mode: difference;

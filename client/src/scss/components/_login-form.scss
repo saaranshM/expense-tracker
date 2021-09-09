@@ -1,0 +1,27 @@
+.login-form {
+  grid-column: 2 / -1;
+  padding: 5rem;
+  width: 100%;
+
+  &_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 18vh;
+    width: 100%;
+  }
+  &_heading {
+    font-weight: 600;
+    font-family: $font-primary;
+    font-size: 4rem;
+
+    & p {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+.login-form-main {
+  margin-top: 3rem;
+  width: 100%;
+}

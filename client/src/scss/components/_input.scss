@@ -1,0 +1,52 @@
+.input-field {
+  margin: 2rem 0;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.input-field label {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+.input-field input {
+  background-color: #f5f5f5;
+  font-family: $font-primary;
+  width: 100%;
+  border: none;
+  padding: 1rem;
+  font-size: 2rem;
+
+  height: 4.5rem;
+  border-radius: 5px;
+  box-shadow: -1.5rem -1.5rem 1.5rem rgba($color: #ccc, $alpha: 0.2),
+    1.5rem 1.5rem 1.5rem rgba($color: #000000, $alpha: 0.15);
+  transition: all 0.3s;
+
+  &:focus,
+  &:active {
+    outline: none;
+    box-shadow: -1.5rem -1.5rem 1.5rem rgba($color: #ccc, $alpha: 0.2),
+      1.5rem 1.5rem 1.5rem rgba($color: #000000, $alpha: 0.15),
+      inset -0.5rem -0.5rem 0.5rem rgba($color: #ccc, $alpha: 0.2),
+      inset 0.5rem 0.5rem 0.5rem rgba($color: #000000, $alpha: 0.15);
+  }
+}
+
+.input-field p {
+  margin-top: 1.5rem;
+  font-family: $font-primary;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-left: auto;
+  align-self: flex-end;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

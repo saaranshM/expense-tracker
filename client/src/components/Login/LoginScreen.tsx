@@ -1,4 +1,5 @@
 import { FC, Fragment, useRef, MouseEvent } from "react";
+import LoginForm from "../../components/Login/LoginForm";
 import LoginHero from "./LoginHero";
 
 interface LoginScreenProps {}
@@ -16,6 +17,7 @@ const LoginScreen: FC<LoginScreenProps> = () => {
     <Fragment>
       <section onMouseMove={handleMouseMove} className="login">
         <LoginHero divRef={cursorRef} />
+        <LoginForm />
       </section>
     </Fragment>
   );
