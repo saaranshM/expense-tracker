@@ -1,11 +1,14 @@
 .login-form {
   grid-column: 2 / -1;
   padding: 5rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
 
   &_container {
     display: flex;
     flex-direction: column;
-    margin-top: 18vh;
+    width: 70%;
   }
   &_heading {
     font-weight: 600;
@@ -22,7 +25,7 @@
 .login-form-main {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
   margin-top: 3rem;
 
   &_or-text {
