@@ -1,0 +1,32 @@
+.button {
+  display: block;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.button button {
+  background-color: $off-white;
+  width: 70%;
+  height: 4.5rem;
+  border: none;
+  box-shadow: -1.5rem -1.5rem 1.5rem rgba(#fff, 0.5),
+    1.5rem 1.5rem 1.5rem rgba(#464646, 0.12);
+  color: black;
+  font-family: $font-primary;
+  font-weight: 600;
+  font-size: 1.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: $off-white 2px solid;
+  transition: all 0.3s ease-out;
+
+  &:active,
+  &:focus {
+    outline: none;
+    color: $tomato;
+    box-shadow: -1.5rem -1.5rem 1.5rem rgba(#fff, 0.5),
+      1.5rem 1.5rem 1.5rem rgba(#464646, 0.12),
+      inset -1.5rem -1.5rem 1.5rem rgba(#fff, 0.5),
+      inset 1.5rem 1.5rem 1.5rem rgba(#464646, 0.12);
+  }
+}
