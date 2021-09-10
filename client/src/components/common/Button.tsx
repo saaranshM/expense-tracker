@@ -1,19 +1,19 @@
 import { FC } from "react";
 
 interface ButtonProps {
-  text: string;
   primary?: boolean;
+  type?: "button" | "submit";
+  onClick?: (...args: any[]) => void;
 }
 
-const Button: FC<ButtonProps> = ({ text, primary }) => {
+const Button: FC<ButtonProps> = ({ type, primary, children, onClick }) => {
   return (
     <div className="button">
       <button
+        type={type}
         className={primary ? "button-primary" : ""}
-        onClick={(e) => {
-          e.preventDefault();
-        }}>
-        {text}
+        onClick={onClick}>
+        {children}
       </button>
     </div>
   );
