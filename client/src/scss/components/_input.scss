@@ -28,6 +28,10 @@
     outline: none;
     box-shadow: $normal-bs;
   }
+
+  &.invalid {
+    border: rgba(#cc0000, 0.4) 2px solid;
+  }
 }
 
 .input-field p {
@@ -45,4 +49,12 @@
     transform: scale(1.1);
     color: $tomato;
   }
+}
+
+.input-error-message {
+  font-family: $font-primary;
+  font-weight: 500;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: rgba(#cc0000, 0.7);
 }

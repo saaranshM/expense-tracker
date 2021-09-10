@@ -1,13 +1,12 @@
-import { FC, useRef, useState, useEffect, FormEvent } from "react";
+import { FC, useRef, useEffect, FormEvent } from "react";
+import { Formik, Form } from "formik";
 import Button from "../common/Button";
 import Input from "../common/Input";
+import * as Yup from "yup";
 
 const LoginFormMain: FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (emailRef.current) {
@@ -15,47 +14,54 @@ const LoginFormMain: FC = () => {
     }
   }, []);
 
-  const emailOnChange = (value: string) => {
-    setEmail(value);
-  };
-  const passwordOnChange = (value: string) => {
-    setPassword(value);
-  };
+  const validate = Yup.object({
+    email: Yup.string().email("Email is invalid").required("Email is required"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required"),
+  });
 
-  const loginHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(email, password);
+  const loginHandler = (values: { email: string; password: string }) => {
+    console.log(values);
   };
 
   const createNewAccountHandler = () => {
     console.log("crate");
   };
   return (
-    <form onSubmit={loginHandler} className="login-form-main">
-      <Input
-        type="email"
-        label="email"
-        placeholder="Enter Email"
-        ref={emailRef}
-        value={email}
-        onChange={emailOnChange}
-      />
-      <Input
-        type="password"
-        label="password"
-        placeholder="Enter Password"
-        ref={passwordRef}
-        value={password}
-        onChange={passwordOnChange}
-      />
-      <Button primary type="submit">
-        Log In
-      </Button>
-      <div className="login-form-main_or-text">or</div>
-      <Button type="button" onClick={createNewAccountHandler}>
-        Create New Account
-      </Button>
-    </form>
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      validationSchema={validate}
+      onSubmit={loginHandler}>
+      {() => (
+        <Form className="login-form-main" action="submit">
+          <Input
+            type="email"
+            label="email"
+            name="email"
+            placeholder="Enter Email"
+            ref={emailRef}
+          />
+          <Input
+            type="password"
+            label="password"
+            name="password"
+            placeholder="Enter Password"
+            ref={passwordRef}
+          />
+          <Button primary type="submit">
+            Log In
+          </Button>
+          <div className="login-form-main_or-text">or</div>
+          <Button type="button" onClick={createNewAccountHandler}>
+            Create New Account
+          </Button>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

@@ -1,27 +1,32 @@
 import { forwardRef } from "react";
+import { ErrorMessage, useField } from "formik";
 
 interface InputPropTypes {
   type?: "email" | "password" | "text";
   label: string;
   placeholder: string;
-  value: string | undefined;
-  onChange: (val: string) => void;
+  name: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputPropTypes>(
-  ({ type, label, placeholder, value, onChange }, ref) => {
+  ({ label, ...props }, ref) => {
+    const [field, meta] = useField(props);
     return (
       <div className="input">
         <div className="input-field">
-          <label>{label}</label>
+          <label htmlFor={field.name}>{label}</label>
           <input
+            className={`${meta.touched && meta.error && "invalid"}`}
             ref={ref as any}
-            value={value}
-            onChange={({ target: { value } }) => onChange(value)}
-            placeholder={placeholder}
-            type={type}
+            {...props}
+            {...field}
           />
-          {type === "password" && <p>Forgot Password?</p>}
+          <ErrorMessage
+            component="div"
+            className="input-error-message"
+            name={field.name}
+          />
+          {props.type === "password" && <p>Forgot Password?</p>}
         </div>
       </div>
     );
