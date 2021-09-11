@@ -1,23 +1,7 @@
 .login {
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  position: relative;
-  cursor: none;
-  background-color: $off-white;
+  @include screenStyle;
 }
 
 .cursor {
-  position: fixed;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background: #fff;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  mix-blend-mode: difference;
-  transition: all 0.1s;
-  border: 1px solid black;
+  @include cursor;
 }

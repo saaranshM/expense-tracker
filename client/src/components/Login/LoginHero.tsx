@@ -10,7 +10,7 @@ const LoginHero: FC<LoginHeroProps> = ({ divRef }) => {
     <div className="login-hero">
       <div className="login-hero_container">
         <div className="login-hero_heading">
-          Lightning fast way to manage your expenses
+          Take the worry out of managing money!
           <span> Start Now!</span>
         </div>
 

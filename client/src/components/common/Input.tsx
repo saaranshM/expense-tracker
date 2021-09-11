@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import { ErrorMessage, useField } from "formik";
+import { useLocation } from "react-router-dom";
 
 interface InputPropTypes {
   type?: "email" | "password" | "text";
@@ -10,6 +11,8 @@ interface InputPropTypes {
 
 const Input = forwardRef<HTMLInputElement, InputPropTypes>(
   ({ label, ...props }, ref) => {
+    const location = useLocation();
+
     const [field, meta] = useField(props);
     return (
       <div className="input">
@@ -26,7 +29,9 @@ const Input = forwardRef<HTMLInputElement, InputPropTypes>(
             className="input-error-message"
             name={field.name}
           />
-          {props.type === "password" && <p>Forgot Password?</p>}
+          {props.type === "password" && location.pathname === "/login" && (
+            <p>Forgot Password?</p>
+          )}
         </div>
       </div>
     );

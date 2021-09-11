@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect, FormEvent } from "react";
+import { FC, useRef, useEffect } from "react";
 import { Formik, Form } from "formik";
 import Button from "../common/Button";
 import Input from "../common/Input";

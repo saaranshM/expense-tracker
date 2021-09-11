@@ -1,0 +1,4 @@
+.register-hero {
+  @include hero($imgHeight: 58rem);
+  grid-column: 2 / -1;
+}

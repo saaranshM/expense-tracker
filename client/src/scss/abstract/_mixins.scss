@@ -8,3 +8,70 @@
     -9px -9px 20px rgba(#fff, 0.9), inset 9px 9px 20px rgba(#000, 0.15),
     inset -9px -9px 20px rgba(#fff, 0.1);
 }
+
+@mixin cursor() {
+  position: fixed;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition: all 0.1s;
+  border: 1px solid black;
+}
+
+@mixin screenStyle() {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  cursor: none;
+  background-color: $off-white;
+}
+
+@mixin hero($imgHeight: auto, $imgWidth: auto) {
+  height: 100%;
+  width: 100%;
+  padding: 5rem;
+  // border: 1px solid black;
+
+  &_container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
+  &_heading {
+    font-family: $font-primary;
+    font-size: 6rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.2;
+    color: $chill;
+    & span {
+      color: $tomato;
+    }
+
+    &:hover ~ .cursor {
+      transform: scale(6);
+    }
+  }
+  &_img {
+    margin-top: 6.5rem;
+    height: $imgHeight;
+    width: $imgWidth;
+    transition: all 0.3s;
+    margin-right: 2rem;
+    &:hover ~ .cursor {
+      transform: scale(6);
+      mix-blend-mode: normal;
+      background-color: rgba($color: #000000, $alpha: 0.05);
+      backdrop-filter: hue-rotate(90deg);
+    }
+  }
+}
