@@ -1,4 +1,5 @@
 import { useRef, MouseEvent } from "react";
+import RegisterForm from "./RegisterForn";
 import { RegisterHero } from "./RegisterHero";
 
 export const RegisterScreen = () => {
@@ -11,6 +12,7 @@ export const RegisterScreen = () => {
   return (
     <section onMouseMove={handleMouseMove} className="register">
       <RegisterHero divRef={cursorRef} />
+      <RegisterForm />
     </section>
   );
 };

@@ -25,8 +25,8 @@ const LoginFormMain: FC = () => {
     console.log(values);
   };
 
-  const createNewAccountHandler = () => {
-    console.log("crate");
+  const createNewAccountRouteHandler = () => {
+    console.log("create");
   };
   return (
     <Formik
@@ -56,7 +56,7 @@ const LoginFormMain: FC = () => {
             Log In
           </Button>
           <div className="login-form-main_or-text">or</div>
-          <Button type="button" onClick={createNewAccountHandler}>
+          <Button type="button" onClick={createNewAccountRouteHandler}>
             Create New Account
           </Button>
         </Form>

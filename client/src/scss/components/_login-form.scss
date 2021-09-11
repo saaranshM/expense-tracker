@@ -1,25 +1,6 @@
 .login-form {
+  @include form;
   grid-column: 2 / -1;
-  padding: 5rem;
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  &_container {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-  }
-  &_heading {
-    font-weight: 600;
-    font-family: $font-primary;
-    font-size: 4rem;
-
-    & p {
-      font-size: 1.5rem;
-      margin-top: 1rem;
-    }
-  }
 }
 
 .login-form-main {
