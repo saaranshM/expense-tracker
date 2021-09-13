@@ -20,7 +20,7 @@ const auth = (req, res, next) => {
     console.log(error.message);
     return res.status(403).json({
       error: "invalid-token",
-      message: "token is invalid",
+      message: error.message,
     });
   }
 };

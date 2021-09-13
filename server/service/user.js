@@ -100,12 +100,9 @@ class UserService {
     return { accessToken, refreshToken };
   }
 
-  async addUserDetails({ monthlyIncome, payDate, bankBalance }, token) {
+  async addUserDetails({ monthlyIncome, payDate, bankBalance }, userId) {
     // get refresh token from header
-    const userAccessToken = token.split(" ")[1];
 
-    // verify refresh token and get user
-    const userId = await verifyAccessToken(userAccessToken);
     const incomeDetails = mapKeys(
       { userId, monthlyIncome, payDate },
       (value, key) => snakeCase(key)
@@ -115,6 +112,10 @@ class UserService {
     );
 
     await UserDAO.addUserDetails(incomeDetails, bankDetails);
+  }
+  async getUserDetails(uid) {
+    const userDetails = await UserDAO.getUserDetails(uid);
+    return userDetails;
   }
 }
 

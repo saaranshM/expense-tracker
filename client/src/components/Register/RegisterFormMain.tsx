@@ -1,14 +1,19 @@
 import { useEffect, useRef } from "react";
 import { Formik, Form } from "formik";
+import { useAppDispatch } from "../../app/hooks/storehooks";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import * as Yup from "yup";
+import { UserRegister } from "../../common/types";
+import { registerUser } from "../../store/user/thunks";
 
 const RegisterFormMain = () => {
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (firstNameRef.current) {
@@ -27,13 +32,8 @@ const RegisterFormMain = () => {
       .required("Password is required"),
   });
 
-  const registerHandler = (values: {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-  }) => {
-    console.log(values);
+  const registerHandler = async (values: UserRegister) => {
+    dispatch(registerUser(values));
   };
 
   const loginNowRouteHandler = () => {

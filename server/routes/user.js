@@ -28,6 +28,14 @@ router.post("/logout", tokenValidator, UserController.logoutUser);
 router.post("/refresh-token", tokenValidator, UserController.refreshToken);
 
 // Route to add user details
-router.post("/details", validateUserDetails, UserController.addUserDetails);
+router.post(
+  "/details",
+  validateUserDetails,
+  auth,
+  UserController.addUserDetails
+);
+
+// Route to get user details
+router.get("/details", auth, UserController.getUserDetails);
 
 module.exports = router;

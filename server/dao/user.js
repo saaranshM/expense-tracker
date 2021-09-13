@@ -64,6 +64,17 @@ class UserDAO {
       await trx.commit();
     });
   }
+
+  async getUserDetails(uid) {
+    const userEmail = await db("user_login")
+      .select(["user_email"])
+      .where({ user_id: uid });
+    const userProfile = await db("user_profile")
+      .select(["first_name", "last_name"])
+      .where({ user_id: uid });
+
+    return { userEmail, userProfile };
+  }
 }
 
 module.exports = new UserDAO();

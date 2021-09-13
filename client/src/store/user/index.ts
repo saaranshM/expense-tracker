@@ -3,12 +3,15 @@ import { RootState } from "..";
 
 interface UserType {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   email: string;
   userId: string;
 }
 interface UserState {
   user: UserType;
+  isFetching: boolean;
+  isSuccess: boolean;
+  isError: boolean;
   isLoggedIn: boolean;
 }
 
@@ -20,6 +23,9 @@ const initialState: UserState = {
     userId: "",
   },
   isLoggedIn: false,
+  isError: false,
+  isFetching: false,
+  isSuccess: false,
 };
 
 export const userSlice = createSlice({
@@ -30,12 +36,21 @@ export const userSlice = createSlice({
       const userPayload = action.payload;
       state.user = userPayload;
     },
+    setIsFetching: (state, action: PayloadAction<boolean>) => {
+      state.isFetching = action.payload;
+    },
+    setIsSuccess: (state, action: PayloadAction<boolean>) => {
+      state.isSuccess = action.payload;
+    },
+    setIsError: (state, action: PayloadAction<boolean>) => {
+      state.isError = action.payload;
+    },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setIsFetching, setIsError, setIsSuccess } =
+  userSlice.actions;
 
-export const selectUser = (state: RootState) => state.user.user;
-export const selectIsLoggedIn = (state: RootState) => state.user.isLoggedIn;
+export const userSelector = (state: RootState) => state.user;
 
 export default userSlice.reducer;
