@@ -12,12 +12,15 @@ const auth = (req, res, next) => {
     }
     const token = tokenHeader.split(" ")[1];
     const payload = jwt.verify(token, process.env.ACCESS_JWT_SECRET);
-    console.log(payload);
-
     req.user = payload.user;
     next();
   } catch (error) {
-    console.log(error.message);
+    if (error.name === "TokenExpiredError") {
+      return res.json({
+        error: "TokenExpiredError",
+        message: error.message,
+      });
+    }
     return res.status(403).json({
       error: "invalid-token",
       message: error.message,

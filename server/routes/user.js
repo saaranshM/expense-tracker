@@ -25,7 +25,7 @@ router.post("/login", validateLoginUser, UserController.loginUser);
 router.post("/logout", tokenValidator, UserController.logoutUser);
 
 // Route to refresh access token //
-router.post("/refresh-token", tokenValidator, UserController.refreshToken);
+router.get("/refresh-token", tokenValidator, UserController.refreshToken);
 
 // Route to add user details
 router.post(

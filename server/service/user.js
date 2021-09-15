@@ -94,7 +94,7 @@ class UserService {
 
     // generate access token and refresh token
     const accessToken = jwtGenerator(userId);
-    const refreshToken = jwtGenerator(userId);
+    const refreshToken = jwtGenerator(userId, "refresh");
 
     // return the tokens to the controller
     return { accessToken, refreshToken };

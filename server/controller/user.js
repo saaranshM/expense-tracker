@@ -91,7 +91,7 @@ class UserController {
           message: "token is invalid",
         });
       }
-
+      console.log(error);
       res.status(500).json({
         error: error.message,
       });

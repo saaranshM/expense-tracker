@@ -8,7 +8,10 @@ const verifyRefreshToken = async (refreshToken) => {
       refreshToken,
       process.env.REFRESH_JWT_SECRET,
       (error, payload) => {
-        if (error) return reject(new Error("invalid-token"));
+        if (error) {
+          console.log(error);
+          return reject(new Error("invalid-token"));
+        }
 
         const user = payload.user;
 
@@ -16,7 +19,9 @@ const verifyRefreshToken = async (refreshToken) => {
           if (error) reject(new Error("redis-get-error"));
 
           if (result === refreshToken) resolve(user);
-          resolve("not-found");
+          console.log(result);
+          console.log(refreshToken);
+          reject("not-found");
         });
       }
     );
