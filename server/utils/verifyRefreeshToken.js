@@ -21,7 +21,7 @@ const verifyRefreshToken = async (refreshToken) => {
           if (result === refreshToken) resolve(user);
           console.log(result);
           console.log(refreshToken);
-          reject("not-found");
+          reject(undefined);
         });
       }
     );

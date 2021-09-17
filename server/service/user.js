@@ -75,8 +75,8 @@ class UserService {
     const userId = await verifyRefreshToken(userRefreshToken);
 
     // if user is not found throw no user to logout error
-    if (userId === "not-found") {
-      throw new Error("invalid-logout");
+    if (!userId) {
+      throw new Error("invalid-refresh-token");
     }
 
     // if user is found del user's refresh token from redis
@@ -91,6 +91,10 @@ class UserService {
 
     // verify refresh token and get user
     const userId = await verifyRefreshToken(userRefreshToken);
+
+    if (!userId) {
+      throw new Error("invalid-refresh-logout");
+    }
 
     // generate access token and refresh token
     const accessToken = jwtGenerator(userId);

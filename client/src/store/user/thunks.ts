@@ -45,27 +45,3 @@ export const registerUser =
       dispatch(setIsFetching(false));
     }
   };
-export const refresh =
-  (
-    refreshToken: string | undefined
-  ): ThunkAction<void, RootState, unknown, AnyAction> =>
-  async (dispatch) => {
-    console.log("refreshing");
-    try {
-      const res = await userClient.get("/user/refresh-token", {
-        headers: {
-          Authorization: "Bearer " + refreshToken,
-        },
-      });
-      const { accessToken, refreshToken: newRefreshToken } = res.data;
-
-      Cookies.set("access", accessToken);
-      Cookies.set("refresh", newRefreshToken);
-      dispatch(setIsSuccess(true));
-    } catch (error: any) {
-      const { data } = error.response;
-      dispatch(setIsLoggedIn(false));
-      dispatch(setIsError(data.error));
-      return undefined;
-    }
-  };

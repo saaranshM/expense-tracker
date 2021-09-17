@@ -37,7 +37,7 @@ const RegisterUserDetails = () => {
     let accessToken: any = Cookies.get("access");
     let refreshToken: any = Cookies.get("refresh");
 
-    accessToken = hasAccess(accessToken, refreshToken);
+    accessToken = await hasAccess(accessToken, refreshToken);
 
     if (!accessToken) {
       dispatch(setIsLoggedIn(false));

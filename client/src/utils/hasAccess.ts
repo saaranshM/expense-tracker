@@ -1,8 +1,8 @@
 import Cookies from "js-cookie";
 import store from "../store";
-import { refresh } from "../store/user/thunks";
+import { refresh } from "../utils/refresh";
 
-const hasAccess = (
+const hasAccess = async (
   accessToken: string | undefined,
   refreshToken: string | undefined
 ) => {
@@ -10,8 +10,7 @@ const hasAccess = (
 
   if (accessToken === undefined) {
     // generate new accessToken
-    store.dispatch(refresh(refreshToken));
-    const newAccessToken = Cookies.get("access");
+    const newAccessToken = await refresh(refreshToken);
     return newAccessToken;
   }
 
