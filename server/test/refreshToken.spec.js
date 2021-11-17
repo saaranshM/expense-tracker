@@ -54,7 +54,7 @@ describe("POST /user/refresh-token", () => {
   it("should fail if invalid refresh token in provided", (done) => {
     chai
       .request(server)
-      .post("/user/refresh-token")
+      .get("/user/refresh-token")
       .set("Authorization", "Bearer invalid-refresh-token")
       .end(async (err, res) => {
         res.should.have.status(403);

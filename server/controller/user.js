@@ -60,17 +60,18 @@ class UserController {
       // call the logout user service
       await UserService.logoutUser(req.header("Authorization"));
 
-      // send status 204 if user succesfully logs out
+      // send status 204 if user successfully logs out
       res.sendStatus(204);
     } catch (error) {
       // send response 400 if no user to logout
+      console.log("ERROR:", error.message);
       if (error.message === "invalid-token") {
         return res.status(403).json({
           error: "invalid-token",
           message: "token is invalid",
         });
       }
-      if (error.message === "invalid-logout") {
+      if (error.message === "invalid-user-refresh-token") {
         return res.status(400).json({ error: error.message });
       }
       res.status(500).json({ error: error.message });
@@ -85,9 +86,12 @@ class UserController {
 
       res.status(200).json(tokens);
     } catch (error) {
-      if (error.message === "invalid-token") {
+      if (
+        error.message === "invalid-token" ||
+        error.message === "invalid-user-refresh-token"
+      ) {
         return res.status(403).json({
-          error: "invalid-token",
+          error: error.message,
           message: "token is invalid",
         });
       }

@@ -76,7 +76,7 @@ class UserService {
 
     // if user is not found throw no user to logout error
     if (!userId) {
-      throw new Error("invalid-refresh-token");
+      throw new Error("invalid-user-refresh-token");
     }
 
     // if user is found del user's refresh token from redis
@@ -93,7 +93,7 @@ class UserService {
     const userId = await verifyRefreshToken(userRefreshToken);
 
     if (!userId) {
-      throw new Error("invalid-refresh-logout");
+      throw new Error("invalid-user-refresh-token");
     }
 
     // generate access token and refresh token

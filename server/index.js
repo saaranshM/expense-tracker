@@ -3,7 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const client = require("./redis/redisInit");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // intializing the express app
 const app = express();
