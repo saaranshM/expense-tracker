@@ -11,7 +11,6 @@ class UserController {
     } catch (error) {
       // send unauthorized response if user already exists
       if (error.message === "user-exists") {
-        console.log(error)
         return res.status(401).json({
           error: "user-exists",
           message: "user already exists",
