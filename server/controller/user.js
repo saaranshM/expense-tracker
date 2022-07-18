@@ -9,8 +9,6 @@ class UserController {
       // sending user token to user after succesful registration
       res.status(201).json(tokens);
     } catch (error) {
-      console.log(error.message);
-
       // send unauthorized response if user already exists
       if (error.message === "user-exists") {
         return res.status(401).json({

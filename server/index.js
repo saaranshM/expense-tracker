@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan")
+
 require("dotenv").config();
 const client = require("./redis/redisInit");
 
@@ -11,6 +13,8 @@ const app = express();
 //MIDDLEWARE//
 app.use(cors());
 app.use(express.json());
+// middleware for req logging
+app.use(morgan("combined"))
 
 //ROUTES//
 app.use("/user", require("./routes/user"));
